@@ -1,0 +1,253 @@
+country_code,country_name
+ABW,Aruba
+AND,Andorra
+AFG,Afghanistan
+AGO,Angola
+ALB,Albania
+ARB,Arab World
+ARE,United Arab Emirates
+ARG,Argentina
+ARM,Armenia
+ASM,American Samoa
+ATG,Antigua and Barbuda
+AUS,Australia
+AUT,Austria
+AZE,Azerbaijan
+BDI,Burundi
+BEL,Belgium
+BEN,Benin
+BFA,Burkina Faso
+BGD,Bangladesh
+BGR,Bulgaria
+BHR,Bahrain
+BHS,"Bahamas, The"
+BIH,Bosnia and Herzegovina
+BLR,Belarus
+BLZ,Belize
+BMU,Bermuda
+BOL,Bolivia
+BRA,Brazil
+BRB,Barbados
+BRN,Brunei Darussalam
+BTN,Bhutan
+BWA,Botswana
+CAA,Sub-Saharan Africa (IFC classification)
+CAF,Central African Republic
+CAN,Canada
+CEA,East Asia and the Pacific (IFC classification)
+CEU,Europe and Central Asia (IFC classification)
+CHE,Switzerland
+CHI,Channel Islands
+CHL,Chile
+CHN,China
+CIV,Cote d'Ivoire
+CLA,Latin America and the Caribbean (IFC classification)
+CME,Middle East and North Africa (IFC classification)
+CMR,Cameroon
+COG,"Congo, Rep."
+COL,Colombia
+COM,Comoros
+CPV,Cabo Verde
+CRI,Costa Rica
+CSA,South Asia (IFC classification)
+CSS,Caribbean small states
+CUB,Cuba
+CUW,Curacao
+CYM,Cayman Islands
+CYP,Cyprus
+CZE,Czech Republic
+DEU,Germany
+DJI,Djibouti
+DMA,Dominica
+DNK,Denmark
+DOM,Dominican Republic
+DZA,Algeria
+EAP,East Asia & Pacific (developing only)
+EAS,East Asia & Pacific (all income levels)
+ECA,Europe & Central Asia (developing only)
+ECS,Europe & Central Asia (all income levels)
+ECU,Ecuador
+EGY,"Egypt, Arab Rep."
+EMU,Euro area
+ERI,Eritrea
+ESP,Spain
+EST,Estonia
+ETH,Ethiopia
+EUU,European Union
+FIN,Finland
+FJI,Fiji
+FRA,France
+FRO,Faeroe Islands
+FSM,"Micronesia, Fed. Sts."
+GAB,Gabon
+GBR,United Kingdom
+GEO,Georgia
+GHA,Ghana
+GIN,Guinea
+GMB,"Gambia, The"
+GNB,Guinea-Bissau
+GNQ,Equatorial Guinea
+GRC,Greece
+GRD,Grenada
+GRL,Greenland
+GTM,Guatemala
+GUM,Guam
+GUY,Guyana
+HIC,High income
+HKG,"Hong Kong SAR, China"
+HND,Honduras
+HPC,Heavily indebted poor countries (HIPC)
+HRV,Croatia
+HTI,Haiti
+HUN,Hungary
+IDN,Indonesia
+IMN,Isle of Man
+IND,India
+INX,Not classified
+IRL,Ireland
+IRN,"Iran, Islamic Rep."
+IRQ,Iraq
+ISL,Iceland
+ISR,Israel
+ITA,Italy
+JAM,Jamaica
+JOR,Jordan
+JPN,Japan
+KAZ,Kazakhstan
+KEN,Kenya
+KGZ,Kyrgyz Republic
+KHM,Cambodia
+KIR,Kiribati
+KNA,St. Kitts and Nevis
+KOR,"Korea, Rep."
+KSV,Kosovo
+KWT,Kuwait
+LAC,Latin America & Caribbean (developing only)
+LAO,Lao PDR
+LBN,Lebanon
+LBR,Liberia
+LBY,Libya
+LCA,St. Lucia
+LCN,Latin America & Caribbean (all income levels)
+LDC,Least developed countries: UN classification
+LIC,Low income
+LIE,Liechtenstein
+LKA,Sri Lanka
+LMC,Lower middle income
+LMY,Low & middle income
+LSO,Lesotho
+LTU,Lithuania
+LUX,Luxembourg
+LVA,Latvia
+MAC,"Macao SAR, China"
+MAF,St. Martin (French part)
+MAR,Morocco
+MCO,Monaco
+MDA,Moldova
+MDG,Madagascar
+MDV,Maldives
+MEA,Middle East & North Africa (all income levels)
+MEX,Mexico
+MHL,Marshall Islands
+MIC,Middle income
+MKD,"Macedonia, FYR"
+MLI,Mali
+MLT,Malta
+MMR,Myanmar
+MNA,Middle East & North Africa (developing only)
+MNE,Montenegro
+MNG,Mongolia
+MNP,Northern Mariana Islands
+MOZ,Mozambique
+MRT,Mauritania
+MUS,Mauritius
+MWI,Malawi
+MYS,Malaysia
+NAC,North America
+NAM,Namibia
+NCL,New Caledonia
+NER,Niger
+NGA,Nigeria
+NIC,Nicaragua
+NLD,Netherlands
+NOC,High income: nonOECD
+NOR,Norway
+NPL,Nepal
+NZL,New Zealand
+OEC,High income: OECD
+OED,OECD members
+OMN,Oman
+OSS,Other small states
+PAK,Pakistan
+PAN,Panama
+PER,Peru
+PHL,Philippines
+PLW,Palau
+PNG,Papua New Guinea
+POL,Poland
+PRI,Puerto Rico
+PRK,"Korea, Dem. Rep."
+PRT,Portugal
+PRY,Paraguay
+PSS,Pacific island small states
+PYF,French Polynesia
+QAT,Qatar
+ROU,Romania
+RUS,Russian Federation
+RWA,Rwanda
+SAS,South Asia
+SAU,Saudi Arabia
+SDN,Sudan
+SEN,Senegal
+SGP,Singapore
+SLB,Solomon Islands
+SLE,Sierra Leone
+SLV,El Salvador
+SMR,San Marino
+SOM,Somalia
+SRB,Serbia
+SSA,Sub-Saharan Africa (developing only)
+SSD,South Sudan
+SSF,Sub-Saharan Africa (all income levels)
+SST,Small states
+STP,Sao Tome and Principe
+SUR,Suriname
+SVK,Slovak Republic
+SVN,Slovenia
+SWE,Sweden
+SWZ,Swaziland
+SXM,Sint Maarten (Dutch part)
+SYC,Seychelles
+SYR,Syrian Arab Republic
+TCA,Turks and Caicos Islands
+TCD,Chad
+TGO,Togo
+THA,Thailand
+TJK,Tajikistan
+TKM,Turkmenistan
+TLS,Timor-Leste
+TON,Tonga
+TTO,Trinidad and Tobago
+TUN,Tunisia
+TUR,Turkey
+TUV,Tuvalu
+TZA,Tanzania
+UGA,Uganda
+UKR,Ukraine
+UMC,Upper middle income
+URY,Uruguay
+USA,United States
+UZB,Uzbekistan
+VCT,St. Vincent and the Grenadines
+VEN,"Venezuela, RB"
+VIR,Virgin Islands (U.S.)
+VNM,Vietnam
+VUT,Vanuatu
+PSE,West Bank and Gaza
+WLD,World
+WSM,Samoa
+YEM,"Yemen, Rep."
+ZAF,South Africa
+COD,"Congo, Dem. Rep."
+ZMB,Zambia
+ZWE,Zimbabwe
