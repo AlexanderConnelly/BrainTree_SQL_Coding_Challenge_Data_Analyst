@@ -4,29 +4,23 @@ Data Integrity Checking & Cleanup
 
 - For all countries that have multiple rows in the continent_map table, delete all multiple records leaving only the 1 record per country. The record that you keep should be the first one when sorted by the continent_code alphabetically ascending. Provide the query/ies and explanation of step(s) that you follow to delete these records.
 
-CREATE DATABASE BrainTreeSQLCodingChallenge
+CREATE DATABASE BrainTree
 
-CREATE TABLE continent_map (
-    ID int IDENTITY (1 , 1) PRIMARY KEY ,
-    country_code nvarchar(3),
-    continent_code nvarchar(2)
-);
-CREATE TABLE continents (
-    continent_code nvarchar(2),
-    continent_name nvarchar(50)
-);
-CREATE TABLE countries (
-    country_code nvarchar(3),
-    country_name nvarchar(100)
-);
-CREATE TABLE per_capita (
-    country_code nvarchar(3),
-    year int,
-    gdp_per_capita float
-);
+CREATE TABLE `braintree`.`continent_map` (`country_code` text, `continent_code` text);
+PREPARE stmt FROM 'INSERT INTO `braintree`.`continent_map` (`continent_code`,`country_code`) VALUES(?,?)'
+DEALLOCATE PREPARE stmt
 
-# Used Flat File Import to Get CSV files into DB Tables
+CREATE TABLE `braintree`.`continents` (`continent_code` text, `continent_name` text)
+PREPARE stmt FROM 'INSERT INTO `braintree`.`continents` (`continent_name`,`continent_code`) VALUES(?,?)'
+DEALLOCATE PREPARE stmt
 
+CREATE TABLE `braintree`.`countries` (`country_code` text, `country_name` text)
+PREPARE stmt FROM 'INSERT INTO `braintree`.`countries` (`country_name`,`country_code`) VALUES(?,?)'
+DEALLOCATE PREPARE stmt
+
+CREATE TABLE `braintree`.`per_capita` (`country_code` text, `year` int, `gdp_per_capita` double)
+PREPARE stmt FROM 'INSERT INTO `braintree`.`per_capita` (`gdp_per_capita`,`country_code`,`year`) VALUES(?,?,?)'
+DEALLOCATE PREPARE stmt
 
 SELECT COALESCE([country_code],'FOO')
       
