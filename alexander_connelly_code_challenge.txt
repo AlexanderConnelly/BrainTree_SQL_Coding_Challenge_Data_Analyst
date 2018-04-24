@@ -260,13 +260,31 @@ Asia    Europe  Rest of World
 28.3%	42.2%	29.4%
 
 PS:
-I didn't like/ understand what the question was asking and took a sum of each continents GDP per capita instead of any other metric for the sake of time. However this metric is a bit strange but this data needs more information in order to properly answer the question, EG, population of each country in the year 2012 to get GDP of each country. Otherwise, continents with more countries are skewed simply because there are more of them, not necessarily a reflection of true GDP % share.
+I have a question to better understand what the question is asking but instead made an assumption and took a sum of each continents GDP per capita instead of any other metric for the sake of time. However this metric is a bit strange but this data needs more information in order to properly answer the question, EG, population of each country in the year 2012 to get GDP of each country. Otherwise, continents with more countries are skewed simply because there are more of them, not necessarily a reflection of true GDP % share.
 
 4a\. What is the count of countries and sum of their related gdp_per_capita values for the year 2007 where the string 'an' (case insensitive) appears anywhere in the country name?
 
+SELECT 
+    COUNT(*), SUM(gdp_per_capita)
+FROM
+    braintree.gdp_join
+WHERE
+    year = 2007 AND LOWER(country_name) LIKE '%an%';
 
+Result:
+
+count(*)    sum(gdp_per_capita)
+58	888339.8619685002
 
 4b\. Repeat question 4a, but this time make the query case sensitive.
+
+SELECT COUNT(*), SUM(gdp_per_capita)
+FROM braintree.gdp_join
+WHERE year = 2007 AND country_name LIKE BINARY '%an%';
+
+Result:
+count(*)    sum(gdp_per_capita)
+56	845004.2528505002
 
 5\. Find the sum of gpd_per_capita by year and the count of countries for each year that have non-null gdp_per_capita where (i) the year is before 2012 and (ii) the country has a null gdp_per_capita in 2012. Your result should have the columns:
 
