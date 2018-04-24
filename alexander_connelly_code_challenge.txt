@@ -292,6 +292,39 @@ count(*)    sum(gdp_per_capita)
 - country_count
 - total
 
+
+SELECT 
+    year, COUNT(DISTINCT (country_name)) as country_count, SUM(gdp_per_capita) as total
+FROM
+    braintree.gdp_join
+WHERE
+    country_code IN (SELECT 
+            t1.country_code
+        FROM
+            braintree.countries t1
+                LEFT JOIN
+            (SELECT 
+                *
+            FROM
+                per_capita
+            WHERE
+                year = 2012) t2 ON (t1.country_code = t2.country_code)
+        WHERE
+            year IS NULL)
+GROUP BY year;
+
+Result:
+
+year    country_count   total
+2004	14	435360.5308659
+2005	14	453525.7332075
+2006	13	491425.8090778
+2007	13	580931.606779
+2008	10	574016.20641
+2009	8	399526.161602
+2010	4	179750.82754000003
+2011	4	199152.680469
+
 6\. All in a single query, execute all of the steps below and provide the results as your final answer:
 
 a. create a single list of all per_capita records for year 2009 that includes columns:
