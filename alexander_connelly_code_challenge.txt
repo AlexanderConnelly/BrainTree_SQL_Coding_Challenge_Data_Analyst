@@ -144,7 +144,63 @@ AUS	Australia	OC	Oceania	2004	30464.00376
 
 /*Using this view as my dataset to refer to, I'll answer the GDP question with this query:*/
 
+use braintree;
 
+CREATE TABLE gdp_growth_rank (
+SELECT 
+    t1.continent_name,
+    t1.country_code,
+    t1.country_name,
+    CONCAT(ROUND(((t2.gdp_2012 - t1.gdp_2011) / t1.gdp_2011) * 100,
+                    2),
+            '%') AS growth_percent
+           
+           ,RANK() OVER (PARTITION BY t1.continent_name order by ((t2.gdp_2012 - t1.gdp_2011) / t1.gdp_2011) desc)  as drank
+FROM
+    (SELECT 
+        continent_name,
+            country_code,
+            country_name,
+            gdp_per_capita AS 'gdp_2011'
+    FROM
+        gdp_join
+    WHERE
+        year = 2011) t1
+        INNER JOIN
+    (SELECT DISTINCT
+        country_code, gdp_per_capita AS 'gdp_2012'
+    FROM
+        gdp_join
+    WHERE
+        year = 2012) t2 ON t1.country_code = t2.country_code);
+
+/*after saving the results of our select statement above, query the resulting table to get ranks 10-12 for each continent*/
+
+SELECT * FROM braintree.gdp_growth_rank
+
+where drank > 9 and drank < 13;
+        
+/* yields these results!*/
+
+rank    continent_name  country_code    country_name    growth_percent
+10	Africa	RWA	Rwanda	8.73%
+11	Africa	GIN	Guinea	8.32%
+12	Africa	NGA	Nigeria	8.09%
+10	Asia	UZB	Uzbekistan	11.12%
+11	Asia	IRQ	Iraq	10.06%
+12	Asia	PHL	Philippines	9.73%
+10	Europe	MNE	Montenegro	-2.93%
+11	Europe	SWE	Sweden	-3.02%
+12	Europe	ISL	Iceland	-3.84%
+10	North America	GTM	Guatemala	2.71%
+11	North America	HND	Honduras	2.71%
+12	North America	ATG	Antigua and Barbuda	2.52%
+10	Oceania	FJI	Fiji	3.29%
+11	Oceania	TUV	Tuvalu	1.27%
+12	Oceania	KIR	Kiribati	0.04%
+10	South America	ARG	Argentina	5.67%
+11	South America	PRY	Paraguay	-3.62%
+12	South America	BRA	Brazil	-9.83%
 
 
 3\. For the year 2012, create a 3 column, 1 row report showing the percent share of gdp_per_capita for the following regions:
@@ -155,7 +211,60 @@ AUS	Australia	OC	Oceania	2004	30464.00376
 ------ | ------ | -------------
 25.0%  | 25.0%  | 50.0%
 
+SELECT 
+    CONCAT(ROUND(((SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012 AND continent_name = 'Asia') / (SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012)) * 100,
+                    1),
+            '%') AS 'Asia',
+    CONCAT(ROUND(((SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012
+                                AND continent_name = 'Europe') / (SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012)) * 100,
+                    1),
+            '%') AS 'Europe',
+    CONCAT(ROUND(((SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012 AND continent_name != 'Asia'
+                                AND continent_name != 'Europe') / (SELECT 
+                            SUM(gdp_per_capita)
+                        FROM
+                            braintree.gdp_join
+                        WHERE
+                            year = 2012)) * 100,
+                    1),
+            '%') AS 'Rest of World'
+
+/* Results of This Query Below! */
+
+Asia    Europe  Rest of World
+28.3%	42.2%	29.4%
+
+PS:
+I didn't like/ understand what the question was asking and took a sum of each continents GDP per capita instead of any other metric for the sake of time. However this metric is a bit strange but this data needs more information in order to properly answer the question, EG, population of each country in the year 2012 to get GDP of each country. Otherwise, continents with more countries are skewed simply because there are more of them, not necessarily a reflection of true GDP % share.
+
 4a\. What is the count of countries and sum of their related gdp_per_capita values for the year 2007 where the string 'an' (case insensitive) appears anywhere in the country name?
+
+
 
 4b\. Repeat question 4a, but this time make the query case sensitive.
 
