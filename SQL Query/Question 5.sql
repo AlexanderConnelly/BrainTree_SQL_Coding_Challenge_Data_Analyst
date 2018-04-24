@@ -1,6 +1,11 @@
 use braintree;
 
+/*5\. Find the sum of gpd_per_capita by year and the count of countries for each year that have non-null gdp_per_capita where (i) the year is before 2012 and (ii) the country has a null gdp_per_capita in 2012. Your result should have the columns:
 
+- year
+- country_count
+- total
+*/
 SELECT 
     year, COUNT(DISTINCT (country_name)), SUM(gdp_per_capita)
 FROM
