@@ -339,23 +339,79 @@ b. order this list by:
 - continent_name ascending
 - characters 2 through 4 (inclusive) of the country_name descending
 
-c. create a running total of gdp_per_capita by continent_name
 
-d. return only the first record from the ordered list for which each continent's running total of gdp_per_capita meets or exceeds $70,000.00 with the following columns:
+SELECT continent_name, country_code, country_name, gdp_per_capita FROM braintree.gdp_join
 
-- continent_name
-- country_code
-- country_name
-- gdp_per_capita
-- running_total
+where year = 2009
 
-7\. Find the country with the highest average gdp_per_capita for each continent for all years. Now compare your list to the following data set. Please describe any and all mistakes that you can find with the data set below. Include any code that you use to help detect these mistakes.
+order by continent_name asc, substring(country_name,2,3) desc
 
-rank | continent_name | country_code | country_name | avg_gdp_per_capita 
----- | -------------- | ------------ | ------------ | -----------------
-   1 | Africa         | SYC          | Seychelles   |         $11,348.66
-   1 | Asia           | KWT          | Kuwait       |         $43,192.49
-   1 | Europe         | MCO          | Monaco       |        $152,936.10
-   1 | North America  | BMU          | Bermuda      |         $83,788.48
-   1 | Oceania        | AUS          | Australia    |         $47,070.39
-   1 | South America  | CHL          | Chile        |         $10,781.71
+Results:
+continent_name  country_code   country_name   gdp_per_capita
+Africa	SWZ	Swaziland	2693.516041
+Africa	RWA	Rwanda	498.8454588
+Africa	BDI	Burundi	194.8966661
+Africa	BFA	Burkina Faso	553.0423743
+Africa	TUN	Tunisia	4177.130224
+Africa	GNB	Guinea-Bissau	536.8028066
+Africa	GIN	Guinea	435.1756629
+Africa	SDN	Sudan	1190.793925
+Africa	ETH	Ethiopia	332.0454408
+Africa	ARM	Armenia	2913.60061
+Africa	ERI	Eritrea	334.0648852
+Africa	GNQ	Equatorial Guinea	15300.6997
+Africa	MOZ	Mozambique	414.110156
+Africa	SSD	South Sudan	1245.038171
+Africa	ZAF	South Africa	5654.492378
+Africa	BWA	Botswana	5178.439109
+Africa	CIV	Cote d'Ivoire	1238.708134
+Africa	MAR	Morocco	2861.027067
+Africa	COD	Congo, Dem. Rep.	185.2322376
+Africa	COG	Congo, Rep.	2401.298155
+Africa	COM	Comoros	803.4861078
+Africa	TGO	Togo	514.7730045
+Africa	AGO	Angola	3988.683557
+Africa	DZA	Algeria	3771.284844
+Africa	ZWE	Zimbabwe	475.8538049
+Africa	NGA	Nigeria	1090.746284
+Africa	NER	Niger	352.6851141
+Africa	SLE	Sierra Leone	435.109412
+Africa	LBY	Libya	10455.57487
+Africa	LBR	Liberia	302.2803524
+Africa	GHA	Ghana	1096.533657
+Africa	TCD	Chad	813.7560302
+Africa	EGY	Egypt, Arab Rep.	2461.530857
+Africa	UGA	Uganda	451.0815515
+Africa	SYC	Seychelles	9707.265361
+Africa	LSO	Lesotho	862.7867207
+Africa	KEN	Kenya	767.8737535
+Africa	CAF	Central African Republic	464.5132313
+Africa	BEN	Benin	712.616527
+Africa	SEN	Senegal	1017.968601
+Africa	MRT	Mauritania	860.9083679
+Africa	MUS	Mauritius	6928.972012
+Africa	STP	Sao Tome and Principe	1134.113593
+Africa	TZA	Tanzania	504.2002377
+Africa	NAM	Namibia	4133.058699
+Africa	CMR	Cameroon	1102.520394
+Africa	ZMB	Zambia	998.4404343
+Africa	GMB	Gambia, The	553.0993514
+Africa	MLI	Mali	661.1317114
+Africa	MWI	Malawi	345.1947614
+Africa	MDG	Madagascar	419.0909429
+Africa	CPV	Cabo Verde	3524.330353
+Africa	GAB	Gabon	7919.710893
+Asia	AZE	Azerbaijan	4950.294791
+Asia	UZB	Uzbekistan	1181.84736
+Asia	KGZ	Kyrgyz Republic	871.2182975
+Asia	CYP	Cyprus	29427.90879
+Asia	KWT	Kuwait	37160.54324
+Asia	RUS	Russian Federation	8615.658757
+Asia	TUR	Turkey	8626.398166
+Asia	TKM	Turkmenistan	4059.973975
+Asia	ISR	Israel	27491.5133
+Asia	BRN	Brunei Darussalam	27212.05637
+Asia	LKA	Sri Lanka	2057.113672
+Asia	IRQ	Iraq	3701.861626
+Asia	IRN	Iran, Islamic Rep.	4931.282897
+
