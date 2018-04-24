@@ -22,15 +22,22 @@ CREATE TABLE `braintree`.`per_capita` (`country_code` text, `year` int, `gdp_per
 PREPARE stmt FROM 'INSERT INTO `braintree`.`per_capita` (`gdp_per_capita`,`country_code`,`year`) VALUES(?,?,?)'
 DEALLOCATE PREPARE stmt
 
-SELECT COALESCE([country_code],'FOO')
-      
-  FROM [dbo].[continent_map]
+/* Replace '' empty strings with NULL*/
+USE braintree;
+UPDATE continent_map
+    
+SET
+    country_code = CASE country_code WHEN '' THEN NULL ELSE country_code END,
+    continent_code = CASE continent_code WHEN '' THEN NULL ELSE continent_code END;
 
-  group by country_code
-
-  having COUNT(*) > 1
-
-  order by country_code;
+/* Select Statement To Pull Up Duplicate Country Codes, FOO on top*/
+SELECT 
+    COALESCE(country_code, 'FOO')
+FROM
+    braintree.continent_map
+GROUP BY country_code
+HAVING COUNT(*) > 1
+ORDER BY country_code;
 
 Results from first part of question selecting duplicates and brining NULL up top.
 
@@ -48,23 +55,27 @@ UMI
 Part 2:
 
 /* Create a temporary table with a new column ID as a row_number on the table after order by contry_code, continent_code*/
- SELECT row_number() over (order by country_code, continent_code asc) as 'ID',[country_code]
-      ,[continent_code] into temp_table
-  FROM [dbo].[continent_map] ;
-  
+ CREATE TABLE t1 (
+ SELECT row_number() over (order by country_code, continent_code asc) as 'ID',country_code
+      ,continent_code
+  FROM braintree.continent_map );
+CREATE TABLE t2 (Select MIN(ID) as ID from t1 group by country_code );
+ 
 /*Delete the rows that dont have a min ID number after group by country_code*/
-  Delete From temp_table where ID NOT IN (Select MIN(ID) from temp_table group by country_code);
-  
+Delete From t1 where ID NOT IN(select ID from t2) ;
+
 /*Reset continent_map table*/
 Delete From continent_map;
 
 /*Refill continent_map from temp_table*/
 insert into continent_map
-  select country_code, continent_code from temp_table;
+  select country_code, continent_code from t1;
  
- /*drop temp_table*/
- DROP TABLE temp_table
-
+ /*drop temporary tables*/
+ DROP TABLE t1;
+ DROP TABLE t2;
+ 
+ 
 Results in Table continent_map:
 
 country_code	continent_code
@@ -98,18 +109,37 @@ The list should include the columns:
 
 /* in order to do this one I first created a VIEW in my data base which joined the per_capita table to all other tables appropriately. the join looks like this*/
 
-SELECT        dbo.per_capita.country_code, dbo.continents.continent_code, dbo.continents.continent_name, dbo.countries.country_name, dbo.per_capita.year, dbo.per_capita.gdp_per_capita
-FROM            dbo.continent_map INNER JOIN
-                         dbo.countries ON dbo.continent_map.country_code = dbo.countries.country_code INNER JOIN
-                         dbo.continents ON dbo.continent_map.continent_code = dbo.continents.continent_code INNER JOIN
-                         dbo.per_capita ON dbo.continent_map.country_code = dbo.per_capita.country_code
-                         
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `braintree`.`gdp_join` AS
+    SELECT 
+        `braintree`.`per_capita`.`country_code` AS `country_code`,
+        `braintree`.`countries`.`country_name` AS `country_name`,
+        `braintree`.`continents`.`continent_code` AS `continent_code`,
+        `braintree`.`continents`.`continent_name` AS `continent_name`,
+        `braintree`.`per_capita`.`year` AS `year`,
+        `braintree`.`per_capita`.`gdp_per_capita` AS `gdp_per_capita`
+    FROM
+        (((`braintree`.`continent_map`
+        JOIN `braintree`.`countries` ON ((`braintree`.`continent_map`.`country_code` = `braintree`.`countries`.`country_code`)))
+        JOIN `braintree`.`continents` ON ((`braintree`.`continent_map`.`continent_code` = `braintree`.`continents`.`continent_code`)))
+        JOIN `braintree`.`per_capita` ON ((`braintree`.`continent_map`.`country_code` = `braintree`.`per_capita`.`country_code`)))
+        
+        
 /* results from the select look like this:*/
-country_code	continent_code	continent_name	country_name	year	gdp_per_capita
-ABW	NA	North America	Aruba	2004	22566.68216
-AND	EU	Europe	Andorra	2004	29372.16674
-AFG	AS	Asia	Afghanistan	2004	220.0562878
-AGO	AF	Africa	Angola	2004	1229.342988
+country_code      country_name	continent_code	continent_name	year	gdp_per_capita
+ABW	Aruba	NA	North America	2004	22566.68216
+AND	Andorra	EU	Europe	2004	29372.16674
+AFG	Afghanistan	AS	Asia	2004	220.0562878
+AGO	Angola	AF	Africa	2004	1229.342988
+ALB	Albania	EU	Europe	2004	2320.89233
+ARE	United Arab Emirates	AS	Asia	2004	40403.98817
+ARG	Argentina	SA	South America	2004	3997.243288
+ARM	Armenia	AF	Africa	2004	1182.09736
+ATG	Antigua and Barbuda	NA	North America	2004	11076.06362
+AUS	Australia	OC	Oceania	2004	30464.00376
 ..... and on and on
 
 /*Using this view as my dataset to refer to, I'll answer the GDP question with this query:*/
